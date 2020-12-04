@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+start = Time.now
+
 def count_trees(input, step_x, step_y)
   width = input.first.size
   height = input.size
@@ -27,3 +29,7 @@ puts count_trees(input, 1, 1) *
      count_trees(input, 1, 7) *
      count_trees(input, 2, 1)
 
+# code to time
+finish = Time.now
+
+puts finish-start
