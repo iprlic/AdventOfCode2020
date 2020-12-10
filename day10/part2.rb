@@ -2,34 +2,22 @@
 
 def check_arragments(adapters, current)
   candidates = {}
-  all_zeros = true
 
   current.each do |key, value|
     if key == 0
       candidates[0] = candidates[0] ? candidates[0] + value : value
     else
-      if adapters.include?(key-1)
-        candidates[key-1] = candidates[key-1] ? candidates[key-1] + value : value
-        all_zeros = false
-      end
-      if adapters.include?(key-2)
-        candidates[key-2] = candidates[key-2] ? candidates[key-2] + value : value
-        all_zeros = false
-      end
-      if adapters.include?(key-3)
-        candidates[key-3] = candidates[key-3] ? candidates[key-3] + value : value
-        all_zeros = false
+      for i in 1..3 do
+        if adapters.include?(key-i)
+          candidates[key-i] = candidates[key-i] ? candidates[key-i] + value : value
+        end
       end
     end
   end
 
-  adapters = adapters.reject { |a| a > candidates.keys.max}
+  return candidates[0] if candidates.keys[0] == 0
 
-  if all_zeros
-    return candidates[0]
-  else
-    check_arragments(adapters, candidates)
-  end
+  check_arragments(adapters, candidates)
 end
 
 file_path = File.expand_path('input.txt', __dir__)
